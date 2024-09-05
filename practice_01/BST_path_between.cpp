@@ -1,34 +1,34 @@
 #include <bits/stdc++.h>
 using namespace std;
+
 vector<int> v[100];
-bool isV[100];
+bool isVis[100];
 int level[100];
 
-void bst_level(int src){
+void sortest_path(int src){
     queue<int> q;
     q.push(src);
-    isV[src] = true;
+    isVis[src] = true;
     level[src] = 0;
     
     while (!q.empty())
     {
         int par = q.front();
         q.pop();
-
-        // cout <<  par << endl;
-
+        
         for(int child:v[par]){
-            if(isV[child] == false){
+            if(isVis[par] == false){
                 q.push(child);
-                level[child] = level[par] + 1;
-                isV[child] = true;
+                isVis[child] = true;
+                level[child] = level[par]+1;
             }
         }
-    } 
+    }
+    
 }
 
 int main(){
-    int n, e, a, b, src;
+    int n, e, a, b, x, src, dsc;
     cin >> n >> e;
     while (e--)
     {
@@ -36,17 +36,24 @@ int main(){
         v[a].push_back(b);
         v[b].push_back(a);
     }
-    
-    cin >> src;
-    memset(isV, false, sizeof(isV));
+    cin >> x;
+    memset(isVis, false, sizeof(isVis));
     memset(level, -1, sizeof(level));
+    cout << x << endl;
 
-    bst_level(src);
+    sortest_path(0);
 
     for (int i = 0; i < n; i++)
     {
-        cout << i << ": " << level[i] << endl;
+        cout << i << " " << level[i] << endl;
     }
+    
+
+    // while (x--)
+    // {
+    //     cin >> src >> dsc;
+    //     // cout << src << " " << dsc << endl;
+    // }
     
     
     return 0;
