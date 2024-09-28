@@ -1,12 +1,13 @@
 #include <bits/stdc++.h>
 using namespace std;
-const int N = 1e5+5;
+const int N = 1e5 + 5;
 vector<int> v[N];
 bool isVisited[N];
 int level[N];
 int parent[N];
 
-bool dfs(int src){
+void bfs(int src)
+{
     queue<int> q;
     q.push(src);
     isVisited[src] = true;
@@ -16,23 +17,27 @@ bool dfs(int src){
     {
         int par = q.front();
         q.pop();
-        for(int child:v[par]){
-            if(!isVisited[child]){
+
+        for (int child : v[par])
+        {
+            if (!isVisited[child])
+            {
                 q.push(child);
                 isVisited[child] = true;
                 parent[child] = par;
-                level[child] = level[par]+1;
+                level[child] = level[par] + 1;
             }
         }
-    }  
-    return false;
+    }
 }
 
-int main(){
+int main()
+{
     int n, e, a, b;
     cin >> n >> e;
 
-    while(e--){
+    while (e--)
+    {
         cin >> a >> b;
         v[a].push_back(b);
         v[b].push_back(a);
@@ -42,7 +47,8 @@ int main(){
     memset(level, -1, sizeof(level));
     memset(parent, -1, sizeof(parent));
 
-    dfs(1);
+    bfs(1);
+    bool isPossible = false;
 
     vector<int> path;
     int x = n;
@@ -50,16 +56,25 @@ int main(){
     {
         path.push_back(x);
         x = parent[x];
+        if (x == 1)
+        {
+            isPossible = true;
+        }
     }
 
-    cout << path.size()<< endl;
-
-    reverse(path.begin(), path.end());
-
-    for (int val : path)
+    if (isPossible)
     {
-        cout << val << " ";
+        cout << path.size() << endl;
+
+        reverse(path.begin(), path.end());
+
+        for (int val : path)
+        {
+            cout << val << " ";
+        }
     }
-    
+
+    isPossible || cout << "IMPOSSIBLE\n";
+
     return 0;
 }

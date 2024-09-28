@@ -15,7 +15,6 @@ bool bfs(int n) {
     while (!q.empty()) {
         int node = q.front();
         q.pop();
-        cout << node << endl;
 
         if (node == n) return true;
 
@@ -44,18 +43,18 @@ int main() {
 
     if (bfs(n)) {
         bfs(n);
-        // vector<int> path;
-        // for (int v = n; v != -1; v = parent[v]) {
-        //     path.push_back(v);
-        // }
+        vector<int> path;
+        for (int v = n; v != -1; v = parent[v]) {
+            path.push_back(v);
+        }
 
-        // reverse(path.begin(), path.end()); 
+        reverse(path.begin(), path.end()); 
 
-        // cout << path.size() << endl;
-        // for (int node : path) {
-        //     cout << node << " ";
-        // }
-        // cout << endl;
+        cout << path.size() << endl;
+        for (int node : path) {
+            cout << node << " ";
+        }
+        cout << endl;
     } else {
         cout << "IMPOSSIBLE" << endl;
     }
