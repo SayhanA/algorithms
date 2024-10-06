@@ -1,8 +1,15 @@
-  for (int i = 0; i <= n; i++)
+ for (int i = 0; i <= n; i++)
     {
-        for (int j = 0; j <= W; j++)
+        for (int j = 0; j <= w; j++)
         {
-            cout << dp[i][j] << " ";
+            if (dp[i][j] == 0)
+            {
+                cout << dp[i][j] << " ";
+            }
+            else
+            {
+                cout << 1 << " ";
+            }
         }
         cout << endl;
     }
