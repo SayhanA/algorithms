@@ -37,7 +37,7 @@ int main()
     {
         cin >> a[i];
         sum += a[i];
-    }
+    } 
     cin >> dif;
 
     int s = (dif + sum) / 2;
